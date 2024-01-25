@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { PipelineService } from '../pipeline.service';
-import { History } from '../history';
+import { PipelineService } from '../_services/pipeline.service';
+import { History } from '../_models/history.model';
 /**
  * @title Table with pagination
  */
@@ -20,14 +20,18 @@ export class HistoryViewComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: false }) paginator: any
 
   constructor(private pipelineService: PipelineService) {
+    this.pipelineService.sendgetHisotry();
   }
   ngOnInit() {
     this.pipelineService.getHistories().subscribe((data: History[]) => {
       this.dataSource.data = data
     })
   }
+  
 
-
+  ngAfterContentInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

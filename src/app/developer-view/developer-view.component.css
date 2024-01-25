@@ -1,3 +1,12 @@
-.example-spacer {
-    flex: 1 1 auto;
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.add-button{
+    float: right;
+    margin: 30px;
 }

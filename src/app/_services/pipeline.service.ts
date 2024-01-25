@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { io } from "socket.io-client";
-import { History } from './history';
-import { State } from './state';
+import { History } from '../_models/history.model';
+import { State } from '../_models/state.model';
+import { User } from '../_models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class PipelineService {
   public message$: BehaviorSubject<string> = new BehaviorSubject('');
   public histories$: BehaviorSubject<History[]> = new BehaviorSubject<History[]>([]);
   public states$: BehaviorSubject<State[]> = new BehaviorSubject<State[]>([]);
-
+  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  
   constructor() { }
 
   socket = io('http://localhost:3000');
@@ -50,11 +52,27 @@ export class PipelineService {
     this.socket.emit('getStates');
   }
 
+  public sendgetHisotry = () => {
+    this.socket.emit('getHistory');
+  }
+
   public getHistories = () => {
     this.socket.on('getHistories', (data) => {
       this.histories$.next(data);
     });
 
     return this.histories$.asObservable();
+  }
+
+  public sendgetAll = () => {
+    this.socket.emit('getAll');
+  }
+
+  public getAll = () => {
+    this.socket.on('getAll', (data) => {
+      this.users$.next(data);
+    });
+
+    return this.users$.asObservable();
   }
 }

@@ -3,9 +3,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
-import { PipelineService } from '../pipeline.service';
+import { PipelineService } from '../_services/pipeline.service';
 import { timer } from 'rxjs';
-import { State } from '../state';
+import { State } from '../_models/state.model';
 
 /**
  * @title Card with footer
@@ -19,9 +19,6 @@ import { State } from '../state';
 })
 
 export class DeviceViewComponent {
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
   stateList: State[] = [];
 
   constructor(private pipelineService: PipelineService) {
@@ -32,7 +29,7 @@ export class DeviceViewComponent {
 
   ngOnInit() {
     this.pipelineService.getStates().subscribe((data: State[]) => {
-      this.stateList = data;
+      this.stateList = data.slice(0, 5);
     })
   }
 }

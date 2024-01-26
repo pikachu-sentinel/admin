@@ -5,6 +5,13 @@ import { History } from '../_models/history.model';
 import { State } from '../_models/state.model';
 import { User } from '../_models/user.model';
 
+interface DialogData {
+  password: string;
+  name: string;
+  id: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +22,7 @@ export class PipelineService {
   public histories$: BehaviorSubject<History[]> = new BehaviorSubject<History[]>([]);
   public states$: BehaviorSubject<State[]> = new BehaviorSubject<State[]>([]);
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  
+
   constructor() { }
 
   socket = io('http://localhost:3000');
@@ -36,7 +43,7 @@ export class PipelineService {
   public getStates = () => {
     this.socket.on('getStates', (data) => {
       data.forEach((element: State, index: number) => {
-        if (Date.now() - element.resp > 5000) {
+        if (Date.now() - element.resp > 10000) {
           data[index].status_d = "Not Responding";
           data[index].status_s = "Not Responding";
         }
@@ -74,5 +81,13 @@ export class PipelineService {
     });
 
     return this.users$.asObservable();
+  }
+
+  public EditUser = (data: DialogData) => {
+    this.socket.emit('EditUser', { data: data });
+  }
+
+  public NewUser = (data: DialogData) => {
+    this.socket.emit('NewUser', { data: data });
   }
 }

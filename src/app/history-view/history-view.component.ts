@@ -23,9 +23,14 @@ export class HistoryViewComponent implements AfterViewInit {
     this.pipelineService.sendgetHisotry();
   }
   ngOnInit() {
+    this.pipelineService.sendgetHisotry();
     this.pipelineService.getHistories().subscribe((data: History[]) => {
       this.dataSource.data = data
     })
+  }
+
+  reload() {
+    this.dataSource.paginator = this.paginator;
   }
   
 

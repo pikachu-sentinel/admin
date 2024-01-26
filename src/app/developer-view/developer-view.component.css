@@ -1,12 +1,30 @@
-table {
-    width: 100%;
+.example-card {
+    max-width: 200px;
+    margin: 20px;
+    border: 1px solid;
+    min-width: 16.6%;
 }
 
-th.mat-sort-header-sorted {
-    color: black;
+.container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.add-button{
+.sub-title {
+    margin: 10px 20px;
+}
+
+.add-button {
     float: right;
-    margin: 30px;
+    background: rgb(124, 55, 236);
+    padding: 10px 20px;
+    margin: 10px 20px;
+    color: white;
+    border: none;
+    transition: all 2s cubic-bezier();
+}
+
+.add-button:hover {
+    background: rgb(193, 56, 235);
+    cursor: pointer;
 }

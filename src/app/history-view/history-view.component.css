@@ -23,3 +23,24 @@
     text-align: center;
     font-weight: bold;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reload-button {
+    padding: 20px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(138, 55, 233);
+    color: white;
+    cursor: pointer;
+    margin-top: 100px;
+}
+
+.reload-button:hover {
+    background-color: rgb(150, 83, 228);
+}

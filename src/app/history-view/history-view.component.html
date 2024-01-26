@@ -44,3 +44,9 @@
     <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 </div>
+
+@if (dataSource.data.length == 0){
+    <div class="container">
+        <button class="reload-button" (click)="reload()">Reload F5</button>
+    </div>
+}

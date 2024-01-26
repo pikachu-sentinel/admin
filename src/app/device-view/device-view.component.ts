@@ -22,7 +22,7 @@ export class DeviceViewComponent {
   stateList: State[] = [];
 
   constructor(private pipelineService: PipelineService) {
-    timer(1000, 1000).subscribe(() => {
+    timer(5000, 5000).subscribe(() => {
       this.pipelineService.sendStates();
     });
   }
